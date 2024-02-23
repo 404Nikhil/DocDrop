@@ -6,7 +6,7 @@ import { ThemeToggler } from './ui/ThemeToggler'
 
 const Header = () => {
   return (
-    <header className='flex items-center justify-between'>
+    <header className='flex items-center pt-2 justify-between'>
     <Link className="flex items-center space-x-2" href="/">
         <div>
             <Image src="/docdrop.jpeg" alt="DocDrop Logo" width={30} height={30} />
