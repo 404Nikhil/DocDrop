@@ -3,6 +3,11 @@ import { cn } from "@/lib/utils";
 import DropzoneComponent from "react-dropzone";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
+import { db } from "@/firebase";
+import { addDoc, serverTimestamp, collection } from "@firebase/firestore";
+import { storage } from "@/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { updateDoc, doc } from "firebase/firestore";
 
 function Dropzone() {
     const [loading, setLoading] = useState(false);
@@ -24,6 +29,24 @@ function Dropzone() {
             if(loading) return;
             if(!user) return;
             setLoading(true);
+            const docRef = await addDoc(collection(db, "users",  user.id, "files" ),{
+            userId : user.id,
+            filename: selectedFile.name,
+            fullName: user.fullName,
+            profileImg: user.imageUrl,
+            timestamp: serverTimestamp(),
+            type: selectedFile.type,
+            size: selectedFile.size,
+        }    
+            )
+            const imageRef = ref(storage, `users/${user.id}/files/${docRef.id}`);
+
+            uploadBytes(imageRef, selectedFile).then(async (snapshot) => {
+            const downloadURL = await getDownloadURL(imageRef);
+            await updateDoc(doc (db, "users", user.id, "files", docRef.id), {
+                downloadURL: downloadURL,
+            });
+            });
 
             setLoading(false); 
 
