@@ -65,10 +65,10 @@ function Dropzone() {
             }) => {
                 const isFileTooLarge = fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
                 return (
-                    <section className="m-8">
+                    <section className=" flex justify-center min-h-screen items-center w-screen">
                         <div {...getRootProps()}
                         className=
-                            "w-full h-52 p-5 border-dashed border-2 border-white rounded-lg flex justify-center items-center cursor-pointer"
+                            "w-[70%] h-[min(400px,50vh)] p-5 border-2 dotted border-dashed border-white shadow-2xl rounded-lg flex justify-center items-center cursor-pointer"
                         >
                             <input {...getInputProps()} className="text-white"/>
                             {!isDragActive && "Click here or drop a file to upload!"}
