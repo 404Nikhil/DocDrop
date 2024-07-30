@@ -3,9 +3,8 @@ import { cn } from "@/lib/utils";
 import DropzoneComponent from "react-dropzone";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
-import { db } from "@/firebase";
 import { addDoc, serverTimestamp, collection } from "@firebase/firestore";
-import { storage } from "@/firebase";
+import { db, storage } from '@/firebase';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateDoc, doc } from "firebase/firestore";
 
