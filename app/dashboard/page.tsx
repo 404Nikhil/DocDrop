@@ -2,7 +2,7 @@ import React from 'react'
 import { auth } from '@clerk/nextjs'
 import Dropzone from '@/components/Dropzone';
 import { collection, doc, getDocs } from 'firebase/firestore';
-import { db, storage } from '@/firebase';
+import { db } from '@/firebase';
 import { FileType } from '@/typing';
 import TableWrapper from '@/components/table/TableWrapper';
 async function Dashboard() {
